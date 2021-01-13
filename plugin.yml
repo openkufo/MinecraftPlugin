@@ -1,0 +1,5 @@
+main : com.openkufo.myplugin.Main
+name : myPlugin
+version : 1.0.0
+author : openkufo
+description : practice
