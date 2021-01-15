@@ -46,6 +46,7 @@ public class Main extends JavaPlugin {
 	
 	public void setEvent() {
 		getServer().getPluginManager().registerEvents(new CreeperGuard(), this);
+		getServer().getPluginManager().registerEvents(new SortChest(), this);
 	}
 	
 }

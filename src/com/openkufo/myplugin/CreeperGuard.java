@@ -9,10 +9,8 @@ public class CreeperGuard implements Listener {
 	
 	@EventHandler
 	public void onExplode(EntityExplodeEvent event) {
-		
 		if (event.getEntityType() == EntityType.CREEPER) {
 			event.setCancelled(true);
 		}
-		
 	}
 }
