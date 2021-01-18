@@ -12,7 +12,7 @@ import com.openkufo.myplugin.command.Commands;
 public class Main extends JavaPlugin {
 	
 	ConsoleCommandSender consol = Bukkit.getConsoleSender();
-	public static boolean canSort;
+	public static boolean isSortable;
 	
 	@Override
 	public void onEnable() {
@@ -37,11 +37,12 @@ public class Main extends JavaPlugin {
 			saveConfig();
 		}
 		
-		canSort = this.getConfig().getBoolean("canSort");
+		isSortable = this.getConfig().getBoolean("isSortable");
 	}
 	
 	public void setCommand() {
-		getCommand("canSort").setExecutor(new Commands());
+		getCommand("set").setExecutor(new Commands());
+		getCommand("set").setTabCompleter(new Commands());
 	}
 	
 	public void setEvent() {

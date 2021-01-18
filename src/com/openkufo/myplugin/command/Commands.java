@@ -1,45 +1,44 @@
 package com.openkufo.myplugin.command;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
+
 import com.openkufo.myplugin.Main;
 
-public class Commands implements CommandExecutor {
+public class Commands implements TabExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command object, String command, String[] chat) {
-		switch (command.toLowerCase()) {
-			case "cansort": canSort(sender, chat); break;
-			default: return false;
+		boolean isSet = command.equalsIgnoreCase("set");
+		boolean hasChat = chat.length > 0;
+		if (isSet && hasChat) {
+			if(chat[0].equalsIgnoreCase("sortable")) {
+				setSortable(sender);
+			}
+		} else {
+			sender.sendMessage("/set <Command> 형식으로 입력하세요!");
 		}
-		
+
 		return false;
 	}
 
-	private void canSort(CommandSender sender, String[] chat) {
-		String msg = "/canSort { true | false } 형식으로 입력하세요!";
-		
-		if (chat.length != 1) {
-			sender.sendMessage(msg);
-			return;
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command object, String command, String[] chat) {
+		boolean isSet = command.equalsIgnoreCase("set");
+		if (isSet) {
+			if(chat.length == 1) {
+				return Arrays.asList("Sortable");
+			}
 		}
-		
-		switch (chat[0].toLowerCase()) {
-		case "true":
-		case "t": 
-			Main.canSort = true;
-			break;
-			
-		case "false":
-		case "f":
-			Main.canSort = false;
-			break;
-			
-		default: sender.sendMessage(msg);
-		}
-		
-		sender.sendMessage("canSort : " + Main.canSort);
+		return null;
 	}
-	
+
+	private void setSortable(CommandSender sender) {
+		Main.isSortable = !Main.isSortable;
+		sender.sendMessage("Sortable : " + Boolean.toString(Main.isSortable));
+	}
 }

@@ -5,5 +5,5 @@ version : 1.0.1
 author : openkufo
 description : practice
 commands :
-  canSort :
-    description : canSort {true | false}
+  set :
+    description : /set Sortable
